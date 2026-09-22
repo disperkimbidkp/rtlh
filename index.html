@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimalisasi Edukasi RTLH Kota Cirebon | Birokrasi Berdampak</title>
+  <meta name="description" content="Laporan Implementasi Birokrasi Berdampak - Optimalisasi Edukasi Masyarakat dalam Pengajuan Bantuan Rumah Tidak Layak Huni (RTLH) di Kota Cirebon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --primary-dark: #0a58ca;
+      --accent: #20c997;
+      --dark: #1a1a2e;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+      --card-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      --radius: 16px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--dark);
+      background: #fff;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 0.8rem 0; transition: all 0.3s;
+    }
+    .navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-weight: 800; font-size: 1.15rem; color: var(--primary);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .logo span { background: linear-gradient(135deg, #0d6efd, #20c997); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a { font-weight: 500; font-size: 0.95rem; color: var(--dark); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #0d4f8b 100%);
+      color: white; position: relative; overflow: hidden; padding-top: 80px;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content {
+      max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem;
+      position: relative; z-index: 1; display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center;
+    }
+    .hero-badge {
+      display: inline-block; background: rgba(32,201,151,0.2); color: #20c997;
+      padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+      margin-bottom: 1.2rem; border: 1px solid rgba(32,201,151,0.3);
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.25;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 span { color: #20c997; }
+    .hero p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; max-width: 540px; }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.5rem;
+      font-size: 0.9rem; opacity: 0.85;
+    }
+    .hero-meta strong { display: block; color: #20c997; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .hero-visual {
+      position: relative; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    }
+    .hero-visual img { width: 100%; height: 380px; object-fit: cover; }
+    .hero-visual .overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      padding: 1.5rem; color: white; font-size: 0.9rem;
+    }
+
+    /* Sections */
+    section { padding: 5rem 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-header .label {
+      display: inline-block; background: rgba(13,110,253,0.1); color: var(--primary);
+      padding: 0.35rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.8rem;
+    }
+    .section-header h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 0.8rem; }
+    .section-header p { color: var(--gray); max-width: 600px; margin: 0 auto; }
+
+    /* Identity Card */
+    .identity-card {
+      background: white; border-radius: var(--radius); box-shadow: var(--card-shadow);
+      padding: 2.5rem; display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: center;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .identity-avatar {
+      width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #0d6efd, #20c997);
+      display: flex; align-items: center; justify-content: center; color: white; font-size: 2.5rem; font-weight: 800;
+    }
+    .identity-info h3 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+    .identity-info .role { color: var(--primary); font-weight: 600; margin-bottom: 1rem; }
+    .identity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.95rem; }
+    .identity-grid dt { color: var(--gray); font-size: 0.8rem; }
+    .identity-grid dd { font-weight: 600; margin-bottom: 0.4rem; }
+
+    /* Problem Cards */
+    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .problem-card {
+      background: white; border-radius: var(--radius); padding: 2rem; box-shadow: var(--card-shadow);
+      border-top: 4px solid var(--primary); transition: transform 0.3s;
+    }
+    .problem-card:hover { transform: translateY(-5px); }
+    .problem-card.accent { border-top-color: var(--accent); }
+    .problem-card.warning { border-top-color: #fd7e14; }
+    .problem-card h3 { font-size: 1.15rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+    .problem-card p { color: var(--gray); font-size: 0.95rem; }
+
+    /* Steps Timeline */
+    .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+    .timeline::before {
+      content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 3px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+    }
+    .timeline-item {
+      position: relative; padding-left: 70px; margin-bottom: 2.5rem;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: 12px; top: 4px; width: 28px; height: 28px;
+      background: white; border: 3px solid var(--primary); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: var(--primary);
+    }
+    .timeline-item:nth-child(even) .timeline-dot { border-color: var(--accent); color: var(--accent); }
+    .timeline-content {
+      background: white; border-radius: var(--radius); padding: 1.5rem 1.8rem; box-shadow: var(--card-shadow);
+    }
+    .timeline-content h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .timeline-content p { color: var(--gray); font-size: 0.95rem; }
+
+    /* Results */
+    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .result-table {
+      background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--card-shadow);
+    }
+    .result-table table { width: 100%; border-collapse: collapse; }
+    .result-table th, .result-table td { padding: 1rem 1.2rem; text-align: left; border-bottom: 1px solid #eee; }
+    .result-table th { background: var(--dark); color: white; font-size: 0.9rem; }
+    .result-table tr:last-child td { border-bottom: none; }
+    .result-table .before { color: #dc3545; font-weight: 500; }
+    .result-table .after { color: #198754; font-weight: 600; }
+    .impact-list { list-style: none; }
+    .impact-list li {
+      background: white; border-radius: 12px; padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+      box-shadow: var(--card-shadow); display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .impact-list .icon {
+      width: 42px; height: 42px; border-radius: 10px; background: rgba(32,201,151,0.15);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.2rem;
+    }
+    .impact-list h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+    .impact-list p { font-size: 0.9rem; color: var(--gray); }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;
+    }
+    .gallery-item {
+      border-radius: var(--radius); overflow: hidden; box-shadow: var(--card-shadow);
+      position: relative; aspect-ratio: 4/3; cursor: pointer; transition: transform 0.3s;
+    }
+    .gallery-item:hover { transform: scale(1.03); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-item .caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      color: white; padding: 1.5rem 1rem 1rem; font-size: 0.85rem;
+    }
+    .gallery-item.tall { grid-row: span 2; aspect-ratio: auto; }
+    .gallery-item.wide { grid-column: span 2; }
+
+    /* Poster Section */
+    .poster-section {
+      background: linear-gradient(180deg, #f0f4f8 0%, #fff 100%);
+    }
+    .poster-wrap {
+      max-width: 500px; margin: 0 auto; border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .poster-wrap img { width: 100%; }
+
+    /* Sustainability */
+    .sustain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .sustain-card {
+      background: white; border-radius: var(--radius); padding: 2rem; box-shadow: var(--card-shadow);
+    }
+    .sustain-card h3 { margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+    .sustain-card ol, .sustain-card ul { padding-left: 1.2rem; color: var(--gray); }
+    .sustain-card li { margin-bottom: 0.6rem; }
+
+    /* Video Placeholder */
+    .video-section { background: var(--dark); color: white; }
+    .video-section .section-header .label { background: rgba(32,201,151,0.2); color: #20c997; }
+    .video-section .section-header p { color: rgba(255,255,255,0.7); }
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .video-card {
+      background: rgba(255,255,255,0.05); border-radius: var(--radius); overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .video-placeholder {
+      aspect-ratio: 16/9; background: linear-gradient(135deg, #1a3a5c, #0d4f8b);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.6); font-size: 0.95rem; gap: 0.8rem;
+    }
+    .video-placeholder .play {
+      width: 64px; height: 64px; border-radius: 50%; background: rgba(32,201,151,0.3);
+      display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #20c997;
+    }
+    .video-card .info { padding: 1.2rem; }
+    .video-card h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+    .video-card p { font-size: 0.85rem; opacity: 0.7; }
+
+    /* Footer */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,0.7); padding: 3rem 0 2rem; text-align: center;
+    }
+    footer .brand { font-weight: 700; color: white; margin-bottom: 0.5rem; }
+    footer p { font-size: 0.9rem; }
+    footer .signature { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+
+    /* Lightbox */
+    .lightbox {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 2000;
+      align-items: center; justify-content: center; padding: 2rem;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-height: 90vh; max-width: 90vw; border-radius: 8px; }
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none;
+      color: white; font-size: 2rem; cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .hero-meta { justify-content: center; }
+      .hero-visual { max-width: 400px; margin: 0 auto; }
+      .results-grid, .sustain-grid { grid-template-columns: 1fr; }
+      .identity-card { grid-template-columns: 1fr; text-align: center; }
+      .identity-avatar { margin: 0 auto; }
+      .identity-grid { text-align: left; }
+      .gallery-item.wide { grid-column: span 1; }
+    }
+    @media (max-width: 700px) {
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white;
+        flex-direction: column; padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo">🏠 <span>RTLH Cirebon</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#identitas">Identitas</a></li>
+        <li><a href="#situasi">Situasi</a></li>
+        <li><a href="#tindakan">Tindakan</a></li>
+        <li><a href="#hasil">Hasil</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#poster">Poster</a></li>
+        <li><a href="#keberlanjutan">Keberlanjutan</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <div>
+        <div class="hero-badge">Laporan Aksi Nyata · Orientasi PPPK 2023/2024</div>
+        <h1>Optimalisasi Edukasi Masyarakat dalam Pengajuan Bantuan <span>Rumah Tidak Layak Huni (RTLH)</span></h1>
+        <p>Implementasi Birokrasi Berdampak di Bidang Kawasan Permukiman, Dinas Perumahan Rakyat dan Kawasan Permukiman Kota Cirebon. Tahun Anggaran 2026.</p>
+        <div class="hero-meta">
+          <div><strong>Peserta</strong>Bayu Permana Putra, S.E.</div>
+          <div><strong>NI PPPK</strong>199207082025211001</div>
+          <div><strong>Jabatan</strong>Penata Layanan Operasional</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="images/image5.jpeg" alt="Kegiatan RTLH Kota Cirebon">
+        <div class="overlay">Dokumentasi verifikasi &amp; pendampingan lapangan</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Identitas -->
+  <section id="identitas">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Profil</span>
+        <h2>Identitas Peserta</h2>
+      </div>
+      <div class="identity-card">
+        <div class="identity-avatar">BP</div>
+        <div class="identity-info">
+          <h3>Bayu Permana Putra, S.E.</h3>
+          <div class="role">Penata Layanan Operasional · PPPK</div>
+          <dl class="identity-grid">
+            <div>
+              <dt>NI PPPK</dt>
+              <dd>199207082025211001</dd>
+            </div>
+            <div>
+              <dt>Unit Kerja</dt>
+              <dd>Dinas Perumahan Rakyat dan Kawasan Permukiman Kota Cirebon</dd>
+            </div>
+            <div>
+              <dt>Bidang</dt>
+              <dd>Kawasan Permukiman</dd>
+            </div>
+            <div>
+              <dt>Pemerintah</dt>
+              <dd>Kota Cirebon · TA 2026</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Situasi -->
+  <section id="situasi" style="background: #f8fafc;">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Permasalahan</span>
+        <h2>Situasi yang Ditemukan</h2>
+        <p>Minimnya media edukasi menyebabkan pemahaman masyarakat terhadap prosedur pengajuan RTLH tidak merata.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <h3>📋 Kondisi Awal</h3>
+          <p>Informasi prosedur disampaikan secara lisan dan tidak terstandarisasi. Warga sering mengajukan berkas tidak lengkap, salah jalur pengusulan, atau bolak-balik melengkapi dokumen.</p>
+        </div>
+        <div class="problem-card accent">
+          <h3>👥 Pihak Terdampak</h3>
+          <p>Calon penerima manfaat, pengurus RT/RW, petugas Kelurahan, serta petugas verifikasi Bidang Kawasan Permukiman DPRKP Kota Cirebon.</p>
+        </div>
+        <div class="problem-card warning">
+          <h3>🔍 Akar Masalah</h3>
+          <p>Belum tersedianya media edukasi praktis, informatif, dan mudah dipahami mengenai definisi RTLH serta alur pengajuannya sesuai Perwal Kota Cirebon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tindakan -->
+  <section id="tindakan">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Solusi</span>
+        <h2>Langkah-Langkah Penyelesaian</h2>
+        <p>Serangkaian aksi terencana untuk memperkuat edukasi publik tentang prosedur RTLH.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-content">
+            <h3>Identifikasi Kebutuhan &amp; Permasalahan Edukasi</h3>
+            <p>Penggalian informasi kepada warga, RT/RW, dan petugas Kelurahan mengenai tingkat pemahaman definisi RTLH, syarat dokumen, dan alur pengajuan.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-content">
+            <h3>Penyusunan Materi Edukasi Sederhana</h3>
+            <p>Menyusun narasi yang mudah dipahami: definisi RTLH, 9 syarat administrasi (Pasal 6), dan 3 jalur pengusulan CPBM (Pasal 9) sesuai Perwal No. 9 Tahun 2025.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-content">
+            <h3>Produksi &amp; Distribusi Media Edukasi</h3>
+            <p>Memproduksi poster infografis berisi definisi, syarat, dan alur, lalu mendistribusikan secara cetak &amp; digital melalui RT/RW, Kelurahan, dan kanal resmi.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-content">
+            <h3>Sosialisasi &amp; Pendampingan Langsung</h3>
+            <p>Sosialisasi tatap muka di tingkat RT/RW dan Kelurahan, serta pendampingan warga dalam melengkapi dokumen persyaratan.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">5</div>
+          <div class="timeline-content">
+            <h3>Uji Coba, Evaluasi &amp; Penyempurnaan</h3>
+            <p>Mengumpulkan umpan balik dari warga dan aparat untuk menyempurnakan konten agar lebih efektif dan berkelanjutan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hasil -->
+  <section id="hasil" style="background: #f8fafc;">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Dampak</span>
+        <h2>Hasil &amp; Perubahan</h2>
+        <p>Media edukasi meningkatkan pemahaman masyarakat dan mempercepat proses verifikasi.</p>
+      </div>
+      <div class="results-grid">
+        <div class="result-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Indikator</th>
+                <th>Sebelum</th>
+                <th>Sesudah</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pemahaman Prosedur RTLH</td>
+                <td class="before">Rendah — sering salah alur</td>
+                <td class="after">Meningkat — dipandu poster</td>
+              </tr>
+              <tr>
+                <td>Kelengkapan Berkas</td>
+                <td class="before">Sering tidak lengkap</td>
+                <td class="after">Lebih lengkap sejak awal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="impact-list">
+          <li>
+            <div class="icon">⚡</div>
+            <div>
+              <h4>Efisiensi Sosialisasi</h4>
+              <p>Memangkas waktu penjelasan berulang karena media dapat diakses kapan saja.</p>
+            </div>
+          </li>
+          <li>
+            <div class="icon">✅</div>
+            <div>
+              <h4>Kualitas Pengajuan</h4>
+              <p>Mengurangi berkas tidak lengkap, mempercepat verifikasi &amp; validasi lapangan.</p>
+            </div>
+          </li>
+          <li>
+            <div class="icon">🔓</div>
+            <div>
+              <h4>Transparansi &amp; Akuntabilitas</h4>
+              <p>Masyarakat memahami tahapan secara terbuka, mengurangi kesalahpahaman.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeri Foto -->
+  <section id="galeri">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Dokumentasi</span>
+        <h2>Galeri Foto Aksi Nyata</h2>
+        <p>Dokumentasi kegiatan pengajuan, sosialisasi, verifikasi lapangan, dan hasil perbaikan RTLH.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox('images/image1.jpeg')">
+          <img src="images/image1.jpeg" alt="Pengajuan usulan RTLH">
+          <div class="caption">Pengajuan usulan CPBM melalui Ketua RW &amp; Lurah</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('images/image2.jpeg')">
+          <img src="images/image2.jpeg" alt="Penjelasan program RTLH">
+          <div class="caption">Penjelasan &amp; pendampingan program RTLH kepada masyarakat</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('images/image3.jpeg')">
+          <img src="images/image3.jpeg" alt="Verifikasi lapangan">
+          <div class="caption">Verifikasi lapangan &amp; pendataan rumah bersama Korfas dan TFL</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('images/image4.png')">
+          <img src="images/image4.png" alt="Sosialisasi">
+          <div class="caption">Sosialisasi materi Pra Konstruksi Perbaikan RTLH</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('images/image5.jpeg')">
+          <img src="images/image5.jpeg" alt="Kondisi sebelum">
+          <div class="caption">Kondisi rumah tidak layak huni sebelum bantuan (PBM: Taruni)</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('images/image6.jpeg')">
+          <img src="images/image6.jpeg" alt="Pendampingan">
+          <div class="caption">Pendampingan &amp; monev pelaksanaan program RTLH</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('images/image7.png')">
+          <img src="images/image7.png" alt="Hasil pekerjaan">
+          <div class="caption">Hasil perbaikan rumah setelah bantuan RTLH (Rp12.000.000)</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('images/image8.jpeg')">
+          <img src="images/image8.jpeg" alt="Dokumentasi kegiatan">
+          <div class="caption">Dokumentasi kegiatan lapangan Bidang Kawasan Permukiman</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section (Placeholder karena tidak ada video asli di dokumen) -->
+  <section id="video" class="video-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Multimedia</span>
+        <h2>Video Dokumentasi</h2>
+        <p>Slot untuk video kegiatan sosialisasi, verifikasi lapangan, dan testimoni warga. (Video dapat ditambahkan kemudian.)</p>
+      </div>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-placeholder">
+            <div class="play">▶</div>
+            <span>Video Sosialisasi RTLH di Kelurahan</span>
+          </div>
+          <div class="info">
+            <h4>Sosialisasi Prosedur Pengajuan</h4>
+            <p>Penyampaian materi edukasi kepada warga &amp; pengurus RT/RW</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-placeholder">
+            <div class="play">▶</div>
+            <span>Video Verifikasi Lapangan</span>
+          </div>
+          <div class="info">
+            <h4>Verifikasi &amp; Pendataan Rumah</h4>
+            <p>Proses verifikasi fisik kondisi rumah calon penerima bantuan</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-placeholder">
+            <div class="play">▶</div>
+            <span>Testimoni Penerima Manfaat</span>
+          </div>
+          <div class="info">
+            <h4>Cerita Perubahan</h4>
+            <p>Pengalaman warga setelah menerima bantuan perbaikan RTLH</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Poster -->
+  <section id="poster" class="poster-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Media Edukasi</span>
+        <h2>Poster Prosedur Pengajuan Bantuan RTLH</h2>
+        <p>Infografis yang memuat definisi RTLH, 9 syarat administrasi (Pasal 6), dan 3 jalur pengusulan CPBM (Pasal 9) sesuai Peraturan Wali Kota Cirebon Nomor 9 Tahun 2025.</p>
+      </div>
+      <div class="poster-wrap" onclick="openLightbox('images/image10.jpeg')" style="cursor:pointer;">
+        <img src="images/image10.jpeg" alt="Poster Edukasi Prosedur Pengajuan Bantuan RTLH Kota Cirebon">
+      </div>
+      <p style="text-align:center; margin-top:1.5rem; color:var(--gray); font-size:0.9rem;">Klik untuk memperbesar · Ukuran penuh tersedia di dokumen pendukung</p>
+    </div>
+  </section>
+
+  <!-- Keberlanjutan -->
+  <section id="keberlanjutan">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Masa Depan</span>
+        <h2>Rencana Keberlanjutan</h2>
+      </div>
+      <div class="sustain-grid">
+        <div class="sustain-card">
+          <h3>🚀 Langkah Pengembangan</h3>
+          <ol>
+            <li>Perluasan distribusi poster &amp; infografis ke seluruh RT/RW dan Kelurahan di Kota Cirebon.</li>
+            <li>Penyusunan modul edukasi cetak (brosur/leaflet) untuk dibagikan di Kelurahan.</li>
+            <li>Evaluasi berkala materi edukasi sesuai perkembangan ketentuan program dan masukan masyarakat.</li>
+          </ol>
+        </div>
+        <div class="sustain-card">
+          <h3>🤝 Pihak yang Dilibatkan</h3>
+          <ul>
+            <li>Pengurus RT/RW dan petugas Kelurahan</li>
+            <li>PPTK &amp; Staf Bidang Kawasan Permukiman DPRKP</li>
+            <li>Dinas Komunikasi dan Informatika (Diskominfo) Kota Cirebon untuk penyebarluasan digital</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="brand">Optimalisasi Edukasi RTLH · Kota Cirebon</div>
+      <p>Laporan Tugas Implementasi Birokrasi Berdampak · Orientasi PPPK Formasi Tahun 2023 dan 2024</p>
+      <p style="margin-top:0.5rem;">Pemerintah Kota Cirebon · Tahun Anggaran 2026</p>
+      <div class="signature">
+        <p>Cirebon, 19 September 2026</p>
+        <p style="margin-top:0.5rem; color:white; font-weight:600;">Bayu Permana Putra, S.E.</p>
+        <p>NI PPPK 199207082025211001</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="Tutup">&times;</button>
+    <img id="lightboxImg" src="" alt="Preview">
+  </div>
+
+  <script>
+    // Navbar scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Mobile menu
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.getElementById('navLinks').classList.remove('open');
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+</body>
+</html>
