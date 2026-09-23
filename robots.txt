@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://birokrasi-berdampak-cirebon.example/sitemap.xml

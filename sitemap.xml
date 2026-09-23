@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://birokrasi-berdampak-cirebon.example/rtlh-edukasi</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://birokrasi-berdampak-cirebon.example/images/36519843-1b54-437a-a4af-1d99b3b10705.png</image:loc>
+      <image:title>Verifikasi Lapangan RTLH Kota Cirebon</image:title>
+      <image:caption>Bayu Permana Putra melakukan verifikasi lapangan dan pendataan kondisi rumah RTLH</image:caption>
+    </image:image>
+  </url>
+</urlset>
